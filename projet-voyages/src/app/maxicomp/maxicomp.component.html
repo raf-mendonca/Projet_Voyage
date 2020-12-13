@@ -1,0 +1,42 @@
+<mat-card>
+    <div class="grid-item-1">
+        <mat-card-header>
+            <img mat-card-image src={{forfait.hotel.photo}} alt="Photo hotel" >
+        </mat-card-header>   
+    </div>
+    <div class="grid-item-2">
+        <div class="grid-subitem-1">
+            <mat-card-subtitle>{{forfait.destination}}</mat-card-subtitle>
+        </div>
+        <div class="grid-subitem-2">
+            <mat-card-title ><span>{{forfait.hotel.nom}}</span></mat-card-title>
+        </div>
+        <div class="grid-subitem-3">
+                
+        <mat-card-content>
+            <div *ngFor="let item of forfait.hotel.caracteristiques">
+                <div> {{item}} </div> 
+            </div>
+            <div>
+                <app-starcomp [starRating]="forfait.hotel.starRating"></app-starcomp>
+            </div>                        
+            <div id="adresse">{{forfait.hotel.adresse}}</div>
+            
+    
+            <div>
+                <h3>À partir de</h3>
+                <div id="div-actions" *ngIf="forfait.rabais>0; else elseBlock">
+                    <p id="p-ancient">{{forfait.prix}}$</p>
+                    <p id="p-rabais"> {{forfait.rabais}}$</p>
+                    <p id="p-reel">{{forfait.prix-forfait.rabais}}$</p>
+                </div>
+                <ng-template #elseBlock><p id="p-forfait">{{forfait.prix}}$</p></ng-template>
+        
+                         
+            </div>
+        </mat-card-content> 
+    </div>         
+      
+    </div>
+     
+</mat-card> 

@@ -1,0 +1,123 @@
+<div>
+<!--Destinations de voyage-->
+<form class="formLayout">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Ville de départ</mat-label>
+      <input  type="text" 
+          placeholder="Ex: Québec"
+          [formControl]="validations"
+          [matAutocomplete]="auto1"
+          matInput
+          minlength="2"
+          maxlength="100"
+          required>
+      <mat-error *ngIf="validations.invalid">{{getErrorValitations()}}</mat-error>         
+      <mat-autocomplete #auto1="matAutocomplete">
+        <mat-option *ngFor="let depart of departs" [value]="depart">
+          {{depart}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+<!-- Ville de depart -->
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Destination</mat-label>
+      <input type="text"
+            placeholder="Ex: Rio de Janeiro, Brèsil"
+            matInput
+            minlength="2"
+            maxlength="100"
+            [formControl]="validations"
+            [matAutocomplete]="auto2"
+            required>
+      <mat-error *ngIf="validations.invalid">{{getErrorValitations()}}</mat-error>  
+      <mat-autocomplete #auto2="matAutocomplete">
+        <mat-option *ngFor="let destination of destinations" [value]="destination">
+          {{destination}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Date de départ</mat-label>
+        <input matInput [matDatepicker]="pickerDate" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerDate></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Date de retour: </mat-label>
+        <input matInput [matDatepicker]="pickerRetour" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerRetour"></mat-datepicker-toggle>
+        <mat-datepicker #pickerRetour></mat-datepicker>
+    </mat-form-field>
+
+
+<!-- Nom Hotel -->
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nom hôtel</mat-label>
+      <input type="text"
+            placeholder="Ex: Fasano Salvador"      
+            matInput            
+            minlength="2"
+            [formControl]="validations"
+            required>
+    <mat-error *ngIf="validations.invalid">{{getErrorValitations()}}</mat-error>  
+    </mat-form-field>
+
+<!-- Prix -->
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Prix</mat-label>
+      <input type="number" matInput min="0" max="99999" [formControl]="number" required>
+      <mat-error *ngIf="number.invalid">{{getErrorMessage()}}</mat-error>
+      <span matPrefix>$&nbsp;</span>
+      <span matSuffix>.00</span>
+    </mat-form-field>
+
+<!-- Adresse Hotel -->
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Adresse</mat-label>
+      <input type="text"
+            matInput 
+            minlength="2" 
+            required>
+      </mat-form-field>
+<!-- Nombre Etoiles -->
+    
+    <mat-label class="titreLayout">Nombre d’étoiles</mat-label>
+    <mat-slider appearance="fill"
+                [(ngModel)]="nbStar" 
+                min="1" 
+                max="5" 
+                step="1" 
+                tickInterval="1"
+                aria-required="true"
+                thumbLabel 
+                [displayWith]="formatValue">
+    </mat-slider>
+    
+<!-- Nombre Chambres -->
+    <mat-form-field class="example-full-width"  appearance="fill">
+      <mat-label>Nombre de Chambres</mat-label>
+      <input matInput 
+            type="number"
+            min="0" 
+            required>
+    </mat-form-field>
+    
+<!--Caractéristiques-->
+<h4 class="example-section">Caractéristiques</h4>
+<section class="example-section">
+  <mat-checkbox>Face à la plage</mat-checkbox>
+  <mat-checkbox>Piscine</mat-checkbox>
+  <mat-checkbox>Restaurants</mat-checkbox>
+  <mat-checkbox>Mini-club</mat-checkbox>
+  <mat-checkbox>Garderie</mat-checkbox>
+  <mat-checkbox>Spa</mat-checkbox>
+  <mat-checkbox>Centre Fitness</mat-checkbox>
+  <mat-checkbox>Wifi gratuit</mat-checkbox>
+</section>
+
+</form>
+</div>

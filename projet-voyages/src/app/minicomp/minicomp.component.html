@@ -1,0 +1,40 @@
+
+<div class="container">
+<mat-card>
+    <mat-card-header >
+        <mat-card-title-group>
+            <div class="grid-item-1">   
+                <div class="grid-subitem-1">
+                    <mat-card-title>Hotel {{forfait.hotel.nom}}</mat-card-title>
+                </div>         
+                <div class="grid-subitem-2">
+                    <mat-card-title>{{forfait.destination}}</mat-card-title>
+                </div>
+                <div class="grid-subitem-3">
+                    <mat-card-subtitle>de {{forfait.depart}}</mat-card-subtitle>
+                </div>            
+            </div>                        
+        </mat-card-title-group>
+    </mat-card-header>
+    <mat-card-content>
+        Hotel {{forfait.hotel.nom}} 
+    </mat-card-content>
+
+    <mat-card-actions>
+        <div id="div-actions" *ngIf="forfait.rabais>0; else elseBlock">
+            <p id="p-ancien">{{forfait.prix}}$</p>
+            <p id="p-rabais">{{forfait.rabais}}$</p>
+            <p id="p-reel">{{forfait.prix-forfait.rabais}}$</p>
+        </div>
+        <ng-template #elseBlock><p>{{forfait.prix}}$</p></ng-template>
+    </mat-card-actions>
+    <mat-card-footer>
+        <div>
+            <app-starcomp [starRating]="forfait.hotel.starRating"></app-starcomp>
+        </div>
+        <div>
+            <p>{{forfait.dateDepart}}, 7 jours</p>
+        </div> 
+    </mat-card-footer>
+</mat-card>
+</div>

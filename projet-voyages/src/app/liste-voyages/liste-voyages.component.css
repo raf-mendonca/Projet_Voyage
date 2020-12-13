@@ -1,0 +1,20 @@
+
+.bg {
+  background-image: url("../../assets/img/pexelcaraibe.jpg");
+ 
+  height: 100%;
+  width: auto;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  display: flex;
+  /*flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;*/
+}
