@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { HttpClientModule } from '@angular/common/http';
+import { VoyagesService } from './voyages.service';
+
 /* Material*/
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +20,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +38,10 @@ import { ForfaitXComponent } from './forfait-x/forfait-x.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EnteteComponent } from './entete/entete.component';
+import { ForfaitYComponent } from './forfait-y/forfait-y.component';
+import { DialogNewVoyageComponent } from './dialog-new-voyage/dialog-new-voyage.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AjouterComponent } from './ajouter/ajouter.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +55,10 @@ import { EnteteComponent } from './entete/entete.component';
     ForfaitXComponent,
     AdministrationComponent,
     PageNotFoundComponent,
-    EnteteComponent
+    EnteteComponent,
+    ForfaitYComponent,
+    DialogNewVoyageComponent,
+    AjouterComponent
   ],
   imports: [
     BrowserModule,
@@ -66,10 +79,14 @@ import { EnteteComponent } from './entete/entete.component';
     MatNativeDateModule,
     MatDatepickerModule,
     MatToolbarModule,
-    MatGridListModule
+    MatGridListModule,
+    HttpClientModule,
+    MatDialogModule,
+    MatTableModule,
+    NgbModule
     
   ],
-  providers: [],
+  providers: [VoyagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

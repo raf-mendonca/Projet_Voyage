@@ -2,6 +2,21 @@
     <mat-grid-list cols="3" rowHeight="2:1">
         <div *ngFor="let item of tableauVoyages">
             <mat-grid-tile *ngIf="item.forfaitVedette">
+                <app-minicomp [forfait]="item"></app-minicomp>
+            </mat-grid-tile>
+        </div>
+    </mat-grid-list>
+    <div *ngFor="let item of tableauVoyages">
+        <app-maxicomp [forfait]="item"></app-maxicomp>
+    </div>
+</div>
+
+
+<!--
+<div>
+    <mat-grid-list cols="3" rowHeight="2:1">
+        <div *ngFor="let item of tableauVoyages">
+            <mat-grid-tile *ngIf="item.forfaitVedette">
                 <app-minicomp  [forfait]="item"></app-minicomp>
             </mat-grid-tile>        
         </div>
@@ -9,5 +24,4 @@
     <div  *ngFor="let item of tableauVoyages">
         <app-maxicomp [forfait]="item"></app-maxicomp>
     </div>
-</div>
-
+</div> -->

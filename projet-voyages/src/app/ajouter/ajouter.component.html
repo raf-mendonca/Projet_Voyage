@@ -1,0 +1,131 @@
+<div style='margin: auto;'>
+    <h1>Ajouter nouveau forfait de voyage</h1>
+    <div class="submit-form">
+        <form *ngIf="!submitted">
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <input type="text" class="form-control" id="destination" [formControl]="validations" minlength="2"
+                    maxlength="200" required [(ngModel)]="forfait.destination" name="destination" />
+            </div>
+
+            <div class="form-group">
+                <label for="depart">Départ</label>
+                <input class="form-control" id="depart" [formControl]="validations" minlength="2" maxlength="160"
+                    required [(ngModel)]="forfait.depart" name="depart" />
+            </div>
+
+            <div class="form-group">
+                <label for="nom">Nom de l'hotel</label>
+                <input type="text" class="form-control" id="nom" [formControl]="validations" minlength="2"
+                    maxlength="160" required [(ngModel)]="forfait.hotel.nom" name="nom" />
+            </div>
+
+            <div class="form-group">
+                <label for="adresse">Adresse de l'hotel</label>
+                <input type="text" class="form-control" id="adresse" [formControl]="validations" minlength="2"
+                    maxlength="200" required [(ngModel)]="forfait.hotel.adresse" name="adresse" />
+            </div>
+
+            <div class="form-group">
+                <label for="starRating">Étoiles</label>
+                <input type="number" class="form-control" id="starRating" min="1" max="5" required
+                    [(ngModel)]="forfait.hotel.starRating" name="starRating" />
+            </div>
+
+            <div class="form-group">
+                <label for="nbrChambres">Nombre de chambres</label>
+                <input type="number" class="form-control" id="nbrChambres" min="0" required
+                    [(ngModel)]="forfait.hotel.nbrChambres" name="nbrChambres" />
+            </div>
+
+            <div class="form-group">
+                <label for="photo">Photo</label>
+                <input type="text" class="form-control" id="photo" required [(ngModel)]="forfait.hotel.photo"
+                    name="photo" />
+            </div>
+
+            <div class="form-group">
+                <label for="caracteristiques">Caracteristiques</label>
+                <!-- <input type="text" class="form-control" id="caracteristiques" required
+                    [(ngModel)]="forfait.hotel.caracteristiques" name="caracteristiques" /> -->
+
+
+                <section class="example-section">
+                    <mat-checkbox id="plage" [(ngModel)]="forfait.hotel.caracteristiques"
+                        (change)="checkchange($event)">
+                        Face à la plage
+                    </mat-checkbox>
+                    <mat-checkbox id="piscine" [(ngModel)]="forfait.hotel.caracteristiques"
+                        (change)="checkchange($event)">
+                        Piscine
+                    </mat-checkbox>
+                    <mat-checkbox id="resto" [(ngModel)]="forfait.hotel.caracteristiques"
+                        (change)="checkchange($event)">
+                        Restaurants
+                    </mat-checkbox>
+                    <mat-checkbox id="club" [(ngModel)]="forfait.hotel.caracteristiques" (change)="checkchange($event)">
+                        Mini-club
+                    </mat-checkbox>
+                    <mat-checkbox id="creche" [(ngModel)]="forfait.hotel.caracteristiques"
+                        (change)="checkchange($event)">
+                        Garderie
+                    </mat-checkbox>
+                    <mat-checkbox id="spa" [(ngModel)]="forfait.hotel.caracteristiques" (change)="checkchange($event)">
+                        Spa
+                    </mat-checkbox>
+                    <mat-checkbox id="fitness" [(ngModel)]="forfait.hotel.caracteristiques"
+                        (change)="checkchange($event)">
+                        Centre Fitness
+                    </mat-checkbox>
+                    <mat-checkbox id="wifi" [(ngModel)]="forfait.hotel.caracteristiques" (change)="checkchange($event)">
+                        Wifi gratuit
+                    </mat-checkbox>
+                </section>
+            </div>
+
+            <div class="form-group">
+                <label for="prix">Prix</label>
+                <input type="number" class="form-control" id="prix" min="0" max="99999" [formControl]="number" required
+                    [(ngModel)]="forfait.prix" name="prix" />
+                <span matPrefix>$&nbsp;</span>
+                <span matSuffix>.00</span>
+            </div>
+
+            <div class="form-group">
+                <label for="rabais">Rabais</label>
+                <input type="number" class="form-control" id="rabais" min="0" max="99999" required
+                    [(ngModel)]="forfait.rabais" name="rabais" />
+                <span matPrefix>$&nbsp;</span>
+                <span matSuffix>.00</span>
+            </div>
+
+            <div class="form-group">
+                <label for="dateDepart">Date de départ</label>
+                <input type="date" class="form-control" id="dateDepart" required [(ngModel)]="forfait.dateDepart"
+                    name="dateDepart" />
+            </div>
+
+            <div class="form-group">
+                <label for="dateRetour">Date de retour</label>
+                <input type="date" class="form-control" id="dateRetour" required [(ngModel)]="forfait.dateRetour"
+                    name="dateRetour" />
+            </div>
+
+            <div class="form-group">
+                <label for="forfaitVedette">Forfait vedette</label>
+                <input class="form-control" id="forfaitVedette" required [(ngModel)]="forfait.forfaitVedette"
+                    name="forfaitVedette" />
+            </div>
+
+            <button (click)="ajouterForfait()" class="btn btn-success">Ajouter</button>
+
+
+        </form>
+
+        <div *ngIf="submitted">
+            <h3>You successfully created a product!</h3>
+            <button class="btn btn-success" (click)="newForfait()">Nouveau..</button>
+        </div>
+
+    </div>
+</div>

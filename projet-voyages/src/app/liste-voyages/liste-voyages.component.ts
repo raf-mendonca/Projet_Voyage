@@ -1,6 +1,6 @@
 import { Component, OnInit , Input } from '@angular/core';
 import { Forfait } from '../forfait';
-import { forfaits } from '../mock-forfaits';
+import { VoyagesService } from '../voyages.service';
 
 @Component({
   selector: 'app-liste-voyages',
@@ -8,13 +8,16 @@ import { forfaits } from '../mock-forfaits';
   styleUrls: ['./liste-voyages.component.css']
 })
 export class ListeVoyagesComponent implements OnInit {
+  tableauVoyages: Forfait[];
 
-  tableauVoyages: Forfait[] = forfaits;
-  @Input() forfait: Forfait;
-
-  constructor() { }
+  constructor(private voyagesService: VoyagesService) { }
 
   ngOnInit(): void {
+    this.getForfaits();
+  }
+  getForfaits(): void {
+    this.voyagesService.getForfaits()
+        .subscribe(resultat => this.tableauVoyages = resultat);
   }
 
 }

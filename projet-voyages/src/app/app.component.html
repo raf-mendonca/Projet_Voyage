@@ -1,4 +1,10 @@
-
-<app-sidenavbar></app-sidenavbar>
-
+<!--Cette navigation vous donne des liens sur lesquels cliquer, qui indique au routeur la route à utiliser (définie dans la constante routes dans AppRoutingModule-->
+<nav>
+    <ul>
+        <li><a routerLink="/sidenavbar" routerLinkActive="active">Accueil</a></li>
+        <li><a routerLink="/forfait-x" routerLinkActive="active">Forfait X</a></li>
+        <li><a routerLink="/forfait-y" routerLinkActive="active">Forfait Y</a></li>
+        <li><a routerLink="/administration" routerLinkActive="active">Administration</a></li>
+    </ul>
+</nav>
 <router-outlet></router-outlet>

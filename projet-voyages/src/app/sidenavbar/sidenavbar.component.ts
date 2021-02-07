@@ -1,6 +1,6 @@
 import { Component, OnInit , Input , Output , EventEmitter} from '@angular/core';
 import { Forfait } from '../forfait';
-import { forfaits } from '../mock-forfaits';
+import { VoyagesService } from '../voyages.service';
 
 
 @Component({
@@ -9,19 +9,24 @@ import { forfaits } from '../mock-forfaits';
   styleUrls: ['./sidenavbar.component.css']
 })
 export class SidenavbarComponent implements OnInit {
-  @Input() forfait: Forfait;
-  forfaits: Forfait[] = forfaits ;
+ /* @Input() forfait: Forfait;
+  forfaits: Forfait[] = forfaits ;*/
   
+  tableauVoyages: Forfait[];
   
   showFiller = false; 
 
   title = 'Forfaits voyage';
 
 
-
-  constructor() { }
+  constructor(private voyagesService: VoyagesService) { }
 
   ngOnInit(): void {
+    this.getForfaits();
+  }
+  getForfaits(): void {
+    this.voyagesService.getForfaits()
+        .subscribe(resultat => this.tableauVoyages = resultat);
   }
 
 }

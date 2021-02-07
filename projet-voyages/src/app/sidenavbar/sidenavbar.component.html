@@ -1,19 +1,20 @@
-
 <mat-drawer-container class="example-container bg" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <app-form-recherche></app-form-recherche>
-  </mat-drawer>    
+  </mat-drawer>
 
   <div>
     <div>
       <div class="bntp">
-        <button  type="button" style="font-size: 22px; border: solid 3px" color="primary" mat-stroked-button (click)="drawer.toggle()">
+        <button type="button" style="font-size: 22px; border: solid 3px" color="primary" mat-stroked-button
+          (click)="drawer.toggle()">
           Rechercher
         </button>
       </div>
-        <div>
-          <app-liste-voyages></app-liste-voyages>
-        </div>
+
+      <div>
+        <app-liste-voyages></app-liste-voyages>
+      </div>
     </div>
   </div>
 

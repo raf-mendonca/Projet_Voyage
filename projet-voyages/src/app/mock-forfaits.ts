@@ -1,7 +1,7 @@
 import { Forfait } from './forfait';
 
-
 export const forfaits : Forfait [] = [
+    
     {
         destination: 'Rio de Janeiro, Brésil',
         depart: 'Québec',

@@ -1,1 +1,305 @@
-<p>administration works!</p>
+<div class="container">
+    <!-- 
+       <app-ajouter></app-ajouter> 
+    -->
+</div>
+<div class="container-fluid">
+    <table mat-table class="pb-5 mb-5" #tableForfait [dataSource]="tableauVoyages"
+        style="display: inline; justify-content: space-between;">
+        <!---->
+        <form #forfaitFormEdition="ngForm" id="forfaitFormEdition"
+            (ngSubmit)="forfaitFormEdition.form.valid && onEdit(forfaitFormEdition)">
+            <!--Destinations-->
+            <ng-container matColumnDef="destination">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493;">Destination </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait ;"
+                        class="input-full-width">
+                        <input name="selectedForfait" [(ngModel)]="selectedForfait.destination" matInput required
+                            minlength="2" maxlength="160" name="destinationEdition" #destinationEdition="ngModel">
+
+                        <mat-error *ngIf="destinationEdition.invalid && (destinationEdition.dirty || destinationEdition.touched) && 
+                                destinationEdition.hasError('required')">La destination est obligatoire.</mat-error>
+                        <mat-error *ngIf="destinationEdition.invalid && (destinationEdition.dirty || destinationEdition.touched) && 
+                                destinationEdition.hasError('minlength')">La destination doit contenir au moins 2
+                            caractères.
+                        </mat-error>
+                        <mat-error *ngIf="destinationEdition.invalid && (destinationEdition.dirty || destinationEdition.touched) && 
+                                destinationEdition.hasError('maxlength')">La destination doit contenir au maximum 50
+                            caractères.</mat-error>
+                    </mat-form-field>
+
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.destination}}</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+            <!--Départ-->
+            <ng-container matColumnDef="depart">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Ville de départ </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input name="selectedForfait" [(ngModel)]="selectedForfait.depart" matInput required
+                            minlength="2" maxlength="160" name="departEdition" #departEdition="ngModel">
+
+                        <mat-error *ngIf="departEdition.invalid && (departEdition.dirty || departEdition.touched) && 
+                                                    departEdition.hasError('required')">Ville de départ est
+                            obligatoire.</mat-error>
+                        <mat-error *ngIf="departEdition.invalid && (departEdition.dirty || departEdition.touched) && 
+                                                    departEdition.hasError('minlength')">Ville de départ doit
+                            contenir au moins 2
+                            caractères.
+                        </mat-error>
+                        <mat-error *ngIf="departEdition.invalid && (departEdition.dirty || departEdition.touched) && 
+                                                    departEdition.hasError('maxlength')">Ville de départ doit
+                            contenir au maximum 50
+                            caractères.</mat-error>
+                    </mat-form-field>
+
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.depart}}</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+            <!--Nom hotel-->
+            <ng-container matColumnDef="hotel.nom">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Nom de l'hotel </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493"> {{forfait.hotel.nom}}
+
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input name="selectedForfait" [(ngModel)]="selectedForfait.hotel.nom" matInput required
+                            minlength="2" maxlength="160" name="nomHotelEd" #nomHotelEd="ngModel">
+
+                        <mat-error *ngIf="nomHotelEd.invalid && (nomHotelEd.dirty || nomHotelEd.touched) && 
+                                                                        nomHotelEd.hasError('required')">Nom de l'hotel
+                            est
+                            obligatoire.</mat-error>
+                        <mat-error *ngIf="nomHotelEd.invalid && (nomHotelEd.dirty || nomHotelEd.touched) && 
+                                                                        nomHotelEd.hasError('minlength')">Nom de
+                            l'hotel doit
+                            contenir au moins 2
+                            caractères.
+                        </mat-error>
+                        <mat-error *ngIf="nomHotelEd.invalid && (nomHotelEd.dirty || nomHotelEd.touched) && 
+                                                                        nomHotelEd.hasError('maxlength')">Nom de
+                            l'hotel doit
+                            contenir au maximum 50
+                            caractères.</mat-error>
+                    </mat-form-field>
+
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.adresse}}</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+            <!--Adresse hotel-->
+            <ng-container matColumnDef="hotel.adresse">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Adresse de l'hotel </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input name="selectedForfait" [(ngModel)]="selectedForfait.hotel.adresse" matInput required
+                            minlength="2" maxlength="160" name="adresseHotelEd" #adresseHotelEd="ngModel">
+
+                        <mat-error
+                            *ngIf="adresseHotelEd.invalid && (adresseHotelEd.dirty || adresseHotelEd.touched) && adresseHotelEd.hasError('required')">
+                            L'adresse de l'hotel est obligatoire.</mat-error>
+                        <mat-error
+                            *ngIf="adresseHotelEd.invalid && (adresseHotelEd.dirty || adresseHotelEd.touched) && adresseHotelEd.hasError('minlength')">
+                            L'adresse de l'hotel doit contenir au moins 2 caractères.
+                        </mat-error>
+                        <mat-error
+                            *ngIf="adresseHotelEd.invalid && (adresseHotelEd.dirty || adresseHotelEd.touched) && adresseHotelEd.hasError('maxlength')">
+                            L'adresse de l'hotel doit contenir au maximum caractères.</mat-error>
+                    </mat-form-field>
+
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.adresse}}</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+            <!--Nbr. étoiles-->
+            <ng-container matColumnDef="hotel.starRating">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Étoiles </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input type="number" name="selectedForfait" [(ngModel)]="selectedForfait.hotel.starRating"
+                            matInput required minlength="1" maxlength="5" name="starHotelEd" #starHotelEd="ngModel">
+                        <mat-error
+                            *ngIf="starHotelEd.invalid && (starHotelEd.dirty || starHotelEd.touched) && starHotelEd.hasError('required')">
+                            Nombre d'étoiles est obligatoire.</mat-error>
+                        <mat-error
+                            *ngIf="starHotelEd.invalid && (starHotelEd.dirty || starHotelEd.touched) && starHotelEd.hasError('minlength')">
+                            L'hotel doit avoir au moins une étoile.
+                        </mat-error>
+                        <mat-error
+                            *ngIf="starHotelEd.invalid && (starHotelEd.dirty || starHotelEd.touched) && starHotelEd.hasError('maxlength')">
+                            L'hotel doit avoir 5 étoiles au maximum.</mat-error>
+                    </mat-form-field>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.starRating}}</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+            <!--Nbr. chambres-->
+            <ng-container matColumnDef="hotel.nbrChambres">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Chambres </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input type="number" name="selectedForfait" [(ngModel)]="selectedForfait.hotel.nbrChambres"
+                            matInput required minlength="1" maxlength="500" name="nbrChambresEd"
+                            #nbrChambresEd="ngModel">
+                        <mat-error
+                            *ngIf="nbrChambresEd.invalid && (nbrChambresEd.dirty || nbrChambresEd.touched) && nbrChambresEd.hasError('required')">
+                            Nombre d'étoiles est obligatoire.</mat-error>
+                        <mat-error
+                            *ngIf="nbrChambresEd.invalid && (nbrChambresEd.dirty || nbrChambresEd.touched) && nbrChambresEd.hasError('minlength')">
+                            L'hotel doit avoir au moins une étoile.
+                        </mat-error>
+                        <mat-error
+                            *ngIf="nbrChambresEd.invalid && (nbrChambresEd.dirty || nbrChambresEd.touched) && nbrChambresEd.hasError('maxlength')">
+                            L'hotel doit avoir 5 étoiles au maximum.</mat-error>
+                    </mat-form-field>
+
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.nbrChambres}}</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+            <!--Photo hotel-->
+            <ng-container matColumnDef="hotel.photo">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Photo </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input name="selectedForfait" [(ngModel)]="selectedForfait.hotel.photo" matInput required
+                            name="photoHotelEd" #photoHotelEd="ngModel">
+                        <mat-error
+                            *ngIf="photoHotelEd.invalid && (photoHotelEd.dirty || photoHotelEd.touched) && photoHotelEd.hasError('required')">
+                            La photo de l'hotel est obligatoire.</mat-error>
+                    </mat-form-field>
+
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.photo}}</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+
+            <!--Caracteristiques-->
+            <ng-container matColumnDef="hotel.caracteristiques">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Caractéristiques </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+                    {{forfait.hotel.caracteristiques}}
+                </td>
+            </ng-container>
+
+            <!--Prix-->
+            <ng-container matColumnDef="prix">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Prix </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input type="number" name="selectedForfait" [(ngModel)]="selectedForfait.prix" matInput required
+                            name="prixEdition" #prixEdition="ngModel">
+                        <mat-error
+                            *ngIf="prixEdition.invalid && (prixEdition.dirty || prixEdition.touched) && prixEdition.hasError('required')">
+                            Le prix du forfait est obligatoire.</mat-error>
+
+                    </mat-form-field>
+
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.prix}}$</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+
+            <!--Rabais-->
+            <ng-container matColumnDef="rabais">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Rabais</th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input type="number" name="selectedForfait" [(ngModel)]="selectedForfait.rabais" matInput
+                            name="rabaisEdition" #rabaisEdition="ngModel">
+
+                    </mat-form-field>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.rabais}}$</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="dateDepart">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Date de départ </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input matInput name="selectedForfait" name="dateDepartEd" #dateDepartEd="ngModel"
+                            [(ngModel)]="selectedForfait.dateDepart" required>
+                    </mat-form-field>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.dateDepart}}</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateRetour">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Date d’arrivée </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input matInput name="selectedForfait" name="dateDepartEd" #dateRetourEd="ngModel"
+                            [(ngModel)]="selectedForfait.dateRetour" required>
+                    </mat-form-field>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.dateRetour}}</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="forfaitVedette">
+                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Forfait vedette </th>
+                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
+                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
+                        class="input-full-width">
+                        <input type="boolean" matInput name="selectedForfait" name="vedetteEdition"
+                            #vedetteEdition="ngModel" [(ngModel)]="selectedForfait.forfaitVedette" required>
+                    </mat-form-field>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.forfaitVedette}}</span>
+                    </ng-template>
+                </td>
+            </ng-container>
+
+        </form>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493"></th>
+            <td mat-cell *matCellDef="let forfait" class="boutonsAction" style="border: 1px solid #FF1493">
+
+                <button *ngIf="(selectedForfait && selectedForfait === forfait);else editButton;" color="primary"
+                    form="forfaitFormEdition" mat-button><i class="material-icons">done</i></button>
+                <ng-template #editButton>
+                    <form (ngSubmit)="onSelect(forfait)">
+                        <button mat-button><i class="material-icons">edit</i></button>
+                    </form>
+                </ng-template>
+                <form (ngSubmit)="onDelete(forfait)">
+                    <button mat-button><i class="material-icons">delete</i></button>
+                </form>
+
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+
+    </table>
+
+</div>
+
+<!--
+                <div style="display: flex;">
+                    <form (ngSubmit)="onEdit(forfait)">
+                        <button mat-button [routerLink]="['editForfait/', forfait.id]" [state]="forfait"><i
+                                class="material-icons">edit</i></button>
+                    </form>
+                    <form (ngSubmit)="onDelete(forfait)">
+                        <button mat-button><i class="material-icons">Delete</i></button>
+                    </form>
+                </div>-->

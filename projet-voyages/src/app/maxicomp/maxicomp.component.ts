@@ -1,5 +1,4 @@
 import { Component, Input , OnInit } from '@angular/core';
-
 import { Forfait } from '../forfait';
 
 @Component({
