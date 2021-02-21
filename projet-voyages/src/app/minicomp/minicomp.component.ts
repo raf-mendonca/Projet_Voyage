@@ -10,6 +10,7 @@ import { Forfait } from '../forfait';
 
 export class MinicompComponent implements OnInit {
   @Input() forfait: Forfait;
+  @Input() nombreEtoiles: number;
   constructor() { }
 
   ngOnInit(): void {

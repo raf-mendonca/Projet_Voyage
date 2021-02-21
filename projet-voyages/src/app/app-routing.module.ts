@@ -6,10 +6,12 @@ import { SidenavbarComponent } from './sidenavbar/sidenavbar.component';
 import { ForfaitXComponent } from './forfait-x/forfait-x.component';
 import { ForfaitYComponent } from './forfait-y/forfait-y.component';
 import { AdministrationComponent } from './administration/administration.component';
+import { AproposComponent } from './apropos/apropos.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'sidenavbar', component: SidenavbarComponent },
+  { path: 'apropos', component: AproposComponent },
   { path: 'forfait-x', component: ForfaitXComponent },
   { path: 'forfait-y', component: ForfaitYComponent },
   { path: 'administration', component: AdministrationComponent },

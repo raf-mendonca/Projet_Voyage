@@ -8,7 +8,7 @@ import { Forfait } from '../forfait';
 })
 export class StarcompComponent implements OnInit {
   @Input() forfait: Forfait;
-  @Input() starRating: number;
+  @Input() nombreEtoiles: number;
    
   constructor() { }
 

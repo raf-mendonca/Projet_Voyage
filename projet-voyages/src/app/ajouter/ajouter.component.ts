@@ -15,22 +15,23 @@ export class AjouterComponent implements OnInit {
    @ViewChild(MatTable) tableForfait: MatTable<any>;
 
   forfait = {
-    id: null, 
-    destination:'', 
-    depart:'', 
-    hotel: { 
-      nom: '', 
-      adresse:'', 
-      starRating: 0, 
-      nbrChambres: 0, 
-      photo:'', 
-      caracteristiques: [''], 
-    },
-    prix: null, 
-    rabais: null, 
-    dateDepart: '', 
-    dateRetour: '', 
-    forfaitVedette: false 
+    _id: null, 
+      destination:'', 
+      villeDepart:'', 
+      hotel: { 
+        nom: '', 
+        coordonnees:'', 
+        nombreEtoiles: 0, 
+        nombreChambres: 0,  
+        caracteristiques: ['']
+      }, 
+      prix: null, 
+      rabais: null, 
+      dateDepart: '', 
+      dateRetour: '', 
+      vedette: false,
+      duree: '',
+      da: '1996489',
   };
   submitted = false;
 
@@ -174,24 +175,23 @@ export class AjouterComponent implements OnInit {
   }
 
   ajouterForfait(): void { //createProduct tableForfaits: MatTable<any>, forfaitFormAjout: NgForm
-    const data = {
-      destination: this.forfait.destination, 
-      depart: this.forfait.depart, 
-      hotel: this.forfait.hotel, 
-        nom: this.forfait.hotel.nom, 
-        adresse: this.forfait.hotel.adresse, 
-        starRating: this.forfait.hotel.starRating, 
-        nbrChambres: this.forfait.hotel.nbrChambres, 
-        photo: this.forfait.hotel.photo, 
-        caracteristiques: this.forfait.hotel.caracteristiques,     
-      prix: this.forfait.prix, 
-      rabais: this.forfait.rabais, 
-      dateDepart: this.forfait.dateDepart, 
-      dateRetour: this.forfait.dateRetour, 
-      forfaitVedette: this.forfait.forfaitVedette
-    };
+    // const data:  = {
+    //   destination: this.forfait.destination, 
+    //   villeDepart: this.forfait.villeDepart, 
+    //   hotel: this.forfait.hotel, 
+    //     nom: this.forfait.hotel.nom, 
+    //     coordonnees: this.forfait.hotel.coordonnees, 
+    //     nombreEtoiles: this.forfait.hotel.nombreEtoiles, 
+    //     nombreChambres: this.forfait.hotel.nombreChambres, 
+    //     caracteristiques: this.forfait.hotel.caracteristiques,     
+    //   prix: this.forfait.prix, 
+    //   rabais: this.forfait.rabais, 
+    //   dateDepart: this.forfait.dateDepart, 
+    //   dateRetour: this.forfait.dateRetour, 
+    //   vedette: this.forfait.vedette
+    // };
 
-    this.voyageService.addForfaits(data)
+    this.voyageService.addForfaits(this.forfait)
       .subscribe(
         response => {
           console.log(response);     //console.log(response.push(response));    
@@ -208,34 +208,24 @@ export class AjouterComponent implements OnInit {
     newForfait(): void {
       this.submitted = false;
       this.forfait = {
-      id: null, 
+      _id: null, 
       destination:'', 
-      depart:'', 
+      villeDepart:'', 
       hotel: { 
         nom: '', 
-        adresse:'', 
-        starRating: 0, 
-        nbrChambres: 0, 
-        photo:'', 
+        coordonnees:'', 
+        nombreEtoiles: 0, 
+        nombreChambres: 0,  
         caracteristiques: ['']
       }, 
       prix: null, 
       rabais: null, 
       dateDepart: '', 
       dateRetour: '', 
-      forfaitVedette: false 
-      };
+      vedette: false,
+      duree: '',
+      da: '1996489',
+    };
   }//Fin ajouter
-
-/*
-  onAdd(tableForfaits: MatTable<any>, forfaitFormAjout: NgForm): void {
-    if (forfaitFormAjout.valid) {
-      
-      this.voyageService.addForfaits(data)
-        .subscribe(response  => { this.response.push(response); forfaitFormAjout.resetForm(); tableForfaits.renderRows(); });
-    }
-  }
-*/ 
-
 
 }//Fin class

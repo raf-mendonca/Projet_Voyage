@@ -1,15 +1,71 @@
-<div class="container">
-    <!-- 
-       <app-ajouter></app-ajouter> 
-    -->
-</div>
-<div class="container-fluid">
+<mat-tab-group style='margin: 20px; ' mat-stretch-tabs>
+    <mat-tab label="Gestion des forfaits">
+        <a style="margin: 20px;" mat-raised-button routerLink="newForfait" color='primary'><i
+                class="material-icons">add</i> Ajouter un nouveau forfait</a>
+        <table mat-table #tableForfaits [dataSource]="tableauVoyages">
+            <ng-container matColumnDef="destination">
+                <th mat-header-cell *matHeaderCellDef> Destination </th>
+                <td mat-cell *matCellDef="let forfait"> {{forfait.destination}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="villeDepart">
+                <th mat-header-cell *matHeaderCellDef> Ville de départ </th>
+                <td mat-cell *matCellDef="let forfait"> {{forfait.villeDepart}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nomHotel">
+                <th mat-header-cell *matHeaderCellDef> Nom de l’hôtel </th>
+                <td mat-cell *matCellDef="let forfait"> {{forfait.hotel.nom}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="prix">
+                <th mat-header-cell *matHeaderCellDef> Prix </th>
+                <td mat-cell *matCellDef="let forfait"> {{forfait.prix-forfait.rabais}}$ </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateDepart">
+                <th mat-header-cell *matHeaderCellDef> Date de départ </th>
+                <td mat-cell *matCellDef="let forfait"> {{forfait.dateDepart | date: 'yyyy-MM-dd'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dateRetour">
+                <th mat-header-cell *matHeaderCellDef> Date d’arrivée </th>
+                <td mat-cell *matCellDef="let forfait"> {{forfait.dateRetour | date: 'yyyy-MM-dd'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+
+                <td mat-cell *matCellDef="let forfait" class="boutonsAction">
+                    <div style="display: flex;">
+                        <form (ngSubmit)="onEdit(forfait)">
+                            <button matTooltip="Éditer le forfait" matTooltipClass="tooltip-red"
+                                matTooltipPosition="left" mat-button [routerLink]="['editForfait/', forfait._id]">
+                                <i class="material-icons">edit</i>
+                            </button>
+                        </form>
+                        <form (ngSubmit)="onDelete(forfait)">
+                            <button mat-button matTooltipPosition="right" matTooltipClass="tooltip-red"
+                                matTooltip="Supprimer le forfait"><i class="material-icons">delete</i></button>
+                        </form>
+                    </div>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+        </table>
+    </mat-tab>
+
+</mat-tab-group>
+
+
+<!--<div class="container-fluid">
     <table mat-table class="pb-5 mb-5" #tableForfait [dataSource]="tableauVoyages"
         style="display: inline; justify-content: space-between;">
-        <!---->
+        
         <form #forfaitFormEdition="ngForm" id="forfaitFormEdition"
             (ngSubmit)="forfaitFormEdition.form.valid && onEdit(forfaitFormEdition)">
-            <!--Destinations-->
+            <!-Destinations
             <ng-container matColumnDef="destination">
                 <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493;">Destination </th>
                 <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
@@ -34,14 +90,14 @@
                     </ng-template>
                 </td>
             </ng-container>
-            <!--Départ-->
-            <ng-container matColumnDef="depart">
+            Départ-
+            <ng-container matColumnDef="villeDepart">
                 <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Ville de départ </th>
                 <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
 
                     <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
                         class="input-full-width">
-                        <input name="selectedForfait" [(ngModel)]="selectedForfait.depart" matInput required
+                        <input name="selectedForfait" [(ngModel)]="selectedForfait.villeDepart" matInput required
                             minlength="2" maxlength="160" name="departEdition" #departEdition="ngModel">
 
                         <mat-error *ngIf="departEdition.invalid && (departEdition.dirty || departEdition.touched) && 
@@ -58,11 +114,11 @@
                             caractères.</mat-error>
                     </mat-form-field>
 
-                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.depart}}</span>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.villeDepart}}</span>
                     </ng-template>
                 </td>
             </ng-container>
-            <!--Nom hotel-->
+            <Nom hotel-
             <ng-container matColumnDef="hotel.nom">
                 <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Nom de l'hotel </th>
                 <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493"> {{forfait.hotel.nom}}
@@ -89,17 +145,17 @@
                             caractères.</mat-error>
                     </mat-form-field>
 
-                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.adresse}}</span>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.coordonnees}}</span>
                     </ng-template>
                 </td>
             </ng-container>
-            <!--Adresse hotel-->
-            <ng-container matColumnDef="hotel.adresse">
+            <Adresse hotel-
+            <ng-container matColumnDef="hotel.coordonnees">
                 <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Adresse de l'hotel </th>
                 <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
                     <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
                         class="input-full-width">
-                        <input name="selectedForfait" [(ngModel)]="selectedForfait.hotel.adresse" matInput required
+                        <input name="selectedForfait" [(ngModel)]="selectedForfait.hotel.coordonnees" matInput required
                             minlength="2" maxlength="160" name="adresseHotelEd" #adresseHotelEd="ngModel">
 
                         <mat-error
@@ -114,17 +170,17 @@
                             L'adresse de l'hotel doit contenir au maximum caractères.</mat-error>
                     </mat-form-field>
 
-                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.adresse}}</span>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.coordonnees}}</span>
                     </ng-template>
                 </td>
             </ng-container>
-            <!--Nbr. étoiles-->
-            <ng-container matColumnDef="hotel.starRating">
+            Nbr. étoiles-
+            <ng-container matColumnDef="hotel.nombreEtoiles">
                 <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Étoiles </th>
                 <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
                     <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
                         class="input-full-width">
-                        <input type="number" name="selectedForfait" [(ngModel)]="selectedForfait.hotel.starRating"
+                        <input type="number" name="selectedForfait" [(ngModel)]="selectedForfait.hotel.nombreEtoiles"
                             matInput required minlength="1" maxlength="5" name="starHotelEd" #starHotelEd="ngModel">
                         <mat-error
                             *ngIf="starHotelEd.invalid && (starHotelEd.dirty || starHotelEd.touched) && starHotelEd.hasError('required')">
@@ -137,17 +193,17 @@
                             *ngIf="starHotelEd.invalid && (starHotelEd.dirty || starHotelEd.touched) && starHotelEd.hasError('maxlength')">
                             L'hotel doit avoir 5 étoiles au maximum.</mat-error>
                     </mat-form-field>
-                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.starRating}}</span>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.nombreEtoiles}}</span>
                     </ng-template>
                 </td>
             </ng-container>
-            <!--Nbr. chambres-->
-            <ng-container matColumnDef="hotel.nbrChambres">
+            <!Nbr. chambres-
+            <ng-container matColumnDef="hotel.nombreChambres">
                 <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Chambres </th>
                 <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
                     <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
                         class="input-full-width">
-                        <input type="number" name="selectedForfait" [(ngModel)]="selectedForfait.hotel.nbrChambres"
+                        <input type="number" name="selectedForfait" [(ngModel)]="selectedForfait.hotel.nombreChambres"
                             matInput required minlength="1" maxlength="500" name="nbrChambresEd"
                             #nbrChambresEd="ngModel">
                         <mat-error
@@ -162,29 +218,12 @@
                             L'hotel doit avoir 5 étoiles au maximum.</mat-error>
                     </mat-form-field>
 
-                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.nbrChambres}}</span>
-                    </ng-template>
-                </td>
-            </ng-container>
-            <!--Photo hotel-->
-            <ng-container matColumnDef="hotel.photo">
-                <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Photo </th>
-                <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
-                    <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
-                        class="input-full-width">
-                        <input name="selectedForfait" [(ngModel)]="selectedForfait.hotel.photo" matInput required
-                            name="photoHotelEd" #photoHotelEd="ngModel">
-                        <mat-error
-                            *ngIf="photoHotelEd.invalid && (photoHotelEd.dirty || photoHotelEd.touched) && photoHotelEd.hasError('required')">
-                            La photo de l'hotel est obligatoire.</mat-error>
-                    </mat-form-field>
-
-                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.photo}}</span>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.hotel.nombreChambres}}</span>
                     </ng-template>
                 </td>
             </ng-container>
 
-            <!--Caracteristiques-->
+            <-Caracteristiques-
             <ng-container matColumnDef="hotel.caracteristiques">
                 <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Caractéristiques </th>
                 <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
@@ -192,7 +231,7 @@
                 </td>
             </ng-container>
 
-            <!--Prix-->
+            <Prix-
             <ng-container matColumnDef="prix">
                 <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Prix </th>
                 <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
@@ -212,7 +251,7 @@
                 </td>
             </ng-container>
 
-            <!--Rabais-->
+            <
             <ng-container matColumnDef="rabais">
                 <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Rabais</th>
                 <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
@@ -254,15 +293,15 @@
                 </td>
             </ng-container>
 
-            <ng-container matColumnDef="forfaitVedette">
+            <ng-container matColumnDef="vedette">
                 <th mat-header-cell *matHeaderCellDef style="border: 1px solid #FF1493">Forfait vedette </th>
                 <td mat-cell *matCellDef="let forfait" style="border: 1px solid #FF1493">
                     <mat-form-field *ngIf="(selectedForfait && selectedForfait === forfait);else editForfait;"
                         class="input-full-width">
                         <input type="boolean" matInput name="selectedForfait" name="vedetteEdition"
-                            #vedetteEdition="ngModel" [(ngModel)]="selectedForfait.forfaitVedette" required>
+                            #vedetteEdition="ngModel" [(ngModel)]="selectedForfait.vedette" required>
                     </mat-form-field>
-                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.forfaitVedette}}</span>
+                    <ng-template #editForfait><span (click)="onSelect(forfait)">{{forfait.vedette}}</span>
                     </ng-template>
                 </td>
             </ng-container>
@@ -291,15 +330,4 @@
 
     </table>
 
-</div>
-
-<!--
-                <div style="display: flex;">
-                    <form (ngSubmit)="onEdit(forfait)">
-                        <button mat-button [routerLink]="['editForfait/', forfait.id]" [state]="forfait"><i
-                                class="material-icons">edit</i></button>
-                    </form>
-                    <form (ngSubmit)="onDelete(forfait)">
-                        <button mat-button><i class="material-icons">Delete</i></button>
-                    </form>
-                </div>-->
+</div>-->

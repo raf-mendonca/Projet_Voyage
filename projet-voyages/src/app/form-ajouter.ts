@@ -1,15 +1,14 @@
-import { Hotel } from './hotel';
-
-export interface Forfait {
+export interface FormAjouter {
     _id: string;
     destination: string;
     villeDepart: string;
-    hotel: Hotel;
+    hotel: string;
+    coordonnee: string;
+    nombreEtoiles: number;
+    hotelChambres: number;
     dateDepart: string;
     dateRetour: string;
     prix: number;
     vedette: boolean;
-    da: string;
-    rabais: number;
-    duree: string;
+    duree: string,
 }

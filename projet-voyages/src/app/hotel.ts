@@ -1,8 +1,7 @@
-export interface Hotel {
-    nom: string,
-    adresse: string,
-    starRating: number,
-    nbrChambres: number,
-    photo: string,
-    caracteristiques: Array<string>,
+export interface Hotel{
+  nom: string;
+  coordonnees: string;
+  nombreEtoiles: number;
+  nombreChambres: number;
+  caracteristiques: string[];
 }

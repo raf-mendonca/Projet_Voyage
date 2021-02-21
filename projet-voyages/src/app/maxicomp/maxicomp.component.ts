@@ -1,5 +1,6 @@
 import { Component, Input , OnInit } from '@angular/core';
 import { Forfait } from '../forfait';
+import { VoyagesService } from '../voyages.service';
 
 @Component({
   selector: 'app-maxicomp',
@@ -8,13 +9,18 @@ import { Forfait } from '../forfait';
 })
 
 export class MaxicompComponent implements OnInit {
+  tableauVoyages: Forfait[]; 
   @Input() forfait: Forfait;
-  @Input() starRating: number;
+  @Input() nombreEtoiles: number;
 
-  constructor() { }
+  constructor(private voyagesService: VoyagesService) { }
 
   ngOnInit(): void {
-    
+    this.getForfaits();
+  }
+  getForfaits(): void {
+    this.voyagesService.getForfaits()
+        .subscribe(resultat => this.tableauVoyages = resultat);
   }
 
 }

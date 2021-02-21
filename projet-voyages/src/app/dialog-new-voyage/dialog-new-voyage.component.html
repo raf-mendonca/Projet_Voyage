@@ -1,94 +1,35 @@
-<form #forfaitFormAjout="ngForm" id="forfaitFormAjout" class="formLayout">
-
-    <mat-form-field class="input-full-width" appearance="fill">
+<form #formAjouter="ngForm" id="formAjouter" class="formLayout">
+    <div class="row">
         <!--Destination-->
-        <mat-label class="titreLayout">Destination</mat-label>
-        <input type="text" name="destination" class='inputLayout' required minlength="2" maxlength="150"
-            [(ngModel)]="newForfait.destination" matInput #destination="ngModel" placeholder="Nouvelle destination">
+        <mat-form-field class="input-full-width" appearance="fill">
 
-        <button matSuffix type="submit" mat-icon-button color="primary" [disabled]="!forfaitFormAjout.form.valid"><i
-                class="material-icons">add</i></button>
-        <mat-error
-            *ngIf="destination.invalid && (destination.dirty || destination.touched) && destination.hasError('required')">
-            La destination est obligatoire.
-        </mat-error>
-        <mat-error
-            *ngIf="destination.invalid && (destination.dirty || destination.touched) && destination.hasError('minlength')">
-            La destination doit contenir au moins 2 caractères.
-        </mat-error>
-        <mat-error
-            *ngIf="destination.invalid && (destination.dirty || destination.touched) && destination.hasError('maxlength')">
-            La destination doit contenir au maximum 50 caractères.
-        </mat-error>
-    </mat-form-field>
+            <mat-label class="titreLayout">Destination</mat-label>
+            <input type="text" name="destination" class='inputLayout' required minlength="2" maxlength="150"
+                #destination="ngModel" [(ngModel)]="newForfait.destination" matInput placeholder="Nouvelle destination">
 
-    <mat-form-field class="input-full-width" appearance="fill">
-        <!--Départ-->
-        <mat-label class="titreLayout">Ville de départ</mat-label>
-        <input type="text" name="depart" required minlength="2" maxlength="150" [(ngModel)]="newForfait.depart" matInput
-            #depart="ngModel" placeholder="Ville de départ">
-        <mat-error *ngIf="depart.invalid && (depart.dirty || depart.touched) && depart.hasError('required')">
-            La depart est obligatoire.
-        </mat-error>
-        <mat-error *ngIf="depart.invalid && (depart.dirty || depart.touched) && depart.hasError('minlength')">
-            La depart doit contenir au moins 2 caractères.
-        </mat-error>
-        <mat-error *ngIf="depart.invalid && (depart.dirty || depart.touched) && depart.hasError('maxlength')">
-            La depart doit contenir au maximum 50 caractères.
-        </mat-error>
-    </mat-form-field>
+            <button matSuffix type="submit" mat-icon-button color="primary" [disabled]="!formAjouter.form.valid"><i
+                    class="material-icons">add</i></button>
+            <mat-error
+                *ngIf="destination.invalid && (destination.dirty || destination.touched) && destination.hasError('required')">
+                La destination est obligatoire.
+            </mat-error>
+            <mat-error
+                *ngIf="destination.invalid && (destination.dirty || destination.touched) && destination.hasError('minlength')">
+                La destination doit contenir au moins 2 caractères.
+            </mat-error>
+            <mat-error
+                *ngIf="destination.invalid && (destination.dirty || destination.touched) && destination.hasError('maxlength')">
+                La destination doit contenir au maximum 50 caractères.
+            </mat-error>
+        </mat-form-field>
 
-    <mat-form-field class="input-full-width" appearance="fill">
-        <!--Hotel-->
-        <mat-label class="titreLayout">Nom de l'hotel</mat-label>
-        <input type="text" name="hotel" required minlength="2" maxlength="150" [(ngModel)]="newForfait.depart" matInput
-            #depart="ngModel" placeholder="Hotel">
-        <mat-error *ngIf="depart.invalid && (depart.dirty || depart.touched) && depart.hasError('required')">
-            La depart est obligatoire.
-        </mat-error>
-        <mat-error *ngIf="depart.invalid && (depart.dirty || depart.touched) && depart.hasError('minlength')">
-            La depart doit contenir au moins 2 caractères.
-        </mat-error>
-        <mat-error *ngIf="depart.invalid && (depart.dirty || depart.touched) && depart.hasError('maxlength')">
-            La depart doit contenir au maximum 50 caractères.
-        </mat-error>
-    </mat-form-field>
 
-    <!-- Prix -->
-    <mat-form-field class="example-full-width" appearance="fill" appearance="fill">
-        <mat-label class="titreLayout">Prix</mat-label>
-        <input type="number" matInput min="0" max="99999" [formControl]="number" required>
-        <mat-error *ngIf="number.invalid">{{getErrorMessage()}}</mat-error>
-        <span matPrefix>$&nbsp;</span>
-        <span matSuffix>.00</span>
-    </mat-form-field>
+        <div mat-dialog-actions>
 
-    <!--Rabais-->
-    <mat-form-field class="input-full-width" appearance="fill">
-        <mat-label class="titreLayout">Rabais</mat-label>
-        <input type="number" name="rabais" min="0" max="99999" [(ngModel)]="newForfait.rabais" matInput
-            #rabais="ngModel" placeholder="Rabais">
-        <mat-error *ngIf="rabais.invalid && (rabais.dirty || rabais.touched) && rabais.hasError('minlength')">
-            La prix doit contenir au moins 2 caractères.
-        </mat-error>
-        <span matPrefix>$&nbsp;</span>
-        <span matSuffix>.00</span>
-    </mat-form-field>
+            <button mat-raised-button color="primary" (click)="onAnnulerClick()" class="m-1">Annuler</button>
+            <button mat-raised-button color="primary" [mat-dialog-close]="newForfait" class="m-1">Ok</button>
 
-    <!--Date de départ-->
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label class="titreLayout">Date de départ</mat-label>
-        <input matInput [matDatepicker]="pickerDate" required>
-        <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
-        <mat-datepicker #pickerDate></mat-datepicker>
-    </mat-form-field>
+        </div>
 
-    <!--Date de retour-->
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label class="titreLayout">Date de retour</mat-label>
-        <input matInput [matDatepicker]="pickerRetour" required>
-        <mat-datepicker-toggle matSuffix [for]="pickerRetour"></mat-datepicker-toggle>
-        <mat-datepicker #pickerRetour></mat-datepicker>
-    </mat-form-field>
-
+    </div>
 </form>

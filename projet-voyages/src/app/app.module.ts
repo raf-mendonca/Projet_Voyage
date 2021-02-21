@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { VoyagesService } from './voyages.service';
 
@@ -22,6 +22,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 
@@ -39,9 +41,9 @@ import { AdministrationComponent } from './administration/administration.compone
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EnteteComponent } from './entete/entete.component';
 import { ForfaitYComponent } from './forfait-y/forfait-y.component';
-import { DialogNewVoyageComponent } from './dialog-new-voyage/dialog-new-voyage.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AjouterComponent } from './ajouter/ajouter.component';
+import { AproposComponent } from './apropos/apropos.component';
 
 @NgModule({
   declarations: [
@@ -57,8 +59,8 @@ import { AjouterComponent } from './ajouter/ajouter.component';
     PageNotFoundComponent,
     EnteteComponent,
     ForfaitYComponent,
-    DialogNewVoyageComponent,
-    AjouterComponent
+    AjouterComponent,
+    AproposComponent
   ],
   imports: [
     BrowserModule,
@@ -81,9 +83,11 @@ import { AjouterComponent } from './ajouter/ajouter.component';
     MatToolbarModule,
     MatGridListModule,
     HttpClientModule,
-    MatDialogModule,
     MatTableModule,
-    NgbModule
+    NgbModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatRadioModule
     
   ],
   providers: [VoyagesService],

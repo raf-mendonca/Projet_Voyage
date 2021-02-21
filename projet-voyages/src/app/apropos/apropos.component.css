@@ -1,0 +1,47 @@
+.bg {
+  background-image: url("../../assets/img/pexelcaraibe.jpg");
+  height: 100%;
+  width: auto;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.stars {
+  color: #daa520;
+  font-size: 1.5em;
+  margin-top: 1em;
+}
+
+h3 {
+  color: #ff1493;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+mat-card {
+  margin: 0 auto;
+  border-radius: 0%;
+  border: none;
+  background: rgba(0, 0, 139, 0.3);
+
+  color: #bcfefe;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+mat-card-title {
+  color: #bcfefe;
+  font-size: 2em;
+}
+
+mat-card-subtitle {
+  color: #ff1493;
+  font-size: 1.5em;
+}
+
+img {
+  height: 18em;
+  vertical-align: middle;
+}

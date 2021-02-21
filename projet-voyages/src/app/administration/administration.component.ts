@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, EventEmitter } from '@angular/core';
 import { FormControl , Validators} from '@angular/forms';
 import { Forfait } from '../forfait';
 import { VoyagesService } from '../voyages.service';
 import { MatTable } from '@angular/material/table';  // Permet de mettre à jour les données du tableau 
 import { NgForm } from '@angular/forms';  // Permet de vérifier si le formulaire est valide
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogNewVoyageComponent } from '../dialog-new-voyage/dialog-new-voyage.component';
+import { AjouterComponent } from '../ajouter/ajouter.component';
 
 
 @Component({
@@ -16,8 +18,14 @@ export class AdministrationComponent implements OnInit {
   @ViewChild(MatTable) tableForfait: MatTable<any>;
 
   tableauVoyages: Forfait[]; 
-  columnsToDisplay = ['destination', 'depart', 'hotel.nom', 'hotel.adresse', 'hotel.starRating', 'hotel.nbrChambres','hotel.photo', 'hotel.caracteristiques', 'prix', 'rabais', 'dateDepart', 'dateRetour', 'forfaitVedette' ,'actions']; 
+  columnsToDisplay = ['destination', 'villeDepart', 'hotel.nom',  'prix', 'rabais', 'dateDepart', 'dateRetour','actions']; 
+  
+  /* ANTIGO
+  columnsToDisplay = ['destination', 'villeDepart', 'hotel.nom', 'hotel.coordonnees', 'hotel.nombreEtoiles', 'hotel.nombreChammbres', 'hotel.caracteristiques', 'prix', 'rabais', 'dateDepart', 'dateRetour', 'vedette' ,'actions']; */
 
+  @Input() forfait: Forfait;
+  @Input() formAjouter: AjouterComponent;
+  @Output() forfaitFormAjout = new EventEmitter();
   newForfait : Forfait;
   selectedForfait: Forfait;
 
@@ -53,26 +61,27 @@ export class AdministrationComponent implements OnInit {
     }
 
   
-  constructor(private voyagesService: VoyagesService) { }
+  constructor(private voyagesService: VoyagesService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.newForfait = {
-      id: null, 
+      _id: null, 
       destination:'', 
-      depart:'', 
+      villeDepart:'', 
       hotel: { 
         nom: '', 
-        adresse:'', 
-        starRating: 0, 
-        nbrChambres: 0, 
-        photo:'', 
+        coordonnees:'', 
+        nombreEtoiles: 0, 
+        nombreChambres: 0,  
         caracteristiques: ['']
       }, 
       prix: null, 
       rabais: null, 
       dateDepart: '', 
       dateRetour: '', 
-      forfaitVedette: null 
+      vedette: false,
+      duree: '',
+      da: '1996489',
     };
     this.getForfaits();
   }
@@ -86,21 +95,31 @@ export class AdministrationComponent implements OnInit {
         .subscribe(resultat => this.tableauVoyages = resultat);
   }
   
+  
   onEdit(forfaitFormEdition: NgForm): void {
     if (forfaitFormEdition.valid) {
       this.voyagesService.updateForfaits(this.selectedForfait)
           .subscribe(() => this.selectedForfait = null);
     }
-  }
+  } 
 
   onDelete(forfait: Forfait): void {
-    this.voyagesService.deleteForfaits(forfait.id)
+    this.voyagesService.deleteForfaits(forfait._id)
         .subscribe(result => this.tableauVoyages = this.tableauVoyages.filter(f => f !== forfait));
-   }
+  }
+  
+  
+  onAdd(tableauVoyages: MatTable<Forfait>, formAjouter: NgForm): void {
+    if (formAjouter.valid) {
+      this.voyagesService.addForfaits(this.newForfait)
+        .subscribe(forfait  => { 
+          /*forfait.push(forfait);*/ 
+          formAjouter.resetForm(); 
+          tableauVoyages.renderRows(); });
+    }
+  } 
 
-}
-
-  /* Exemple avec open dialog 
+  /* Exemple avec open dialog */
   
   openDialogNewVoyage(): void {
     const dialogRef = this.dialog.open(DialogNewVoyageComponent, {
@@ -115,17 +134,19 @@ export class AdministrationComponent implements OnInit {
         console.log(this.newForfait);
         this.voyagesService.addForfaits(this.newForfait)
             .subscribe(forfait  => { 
-              /*this.tableauVoyages.push(forfait); //erreur dans forfait => element acces expression should take an argument???? 
-              this.newForfait.id = null; 
+
+              this.tableauVoyages.push(forfait); //erreur dans forfait => element acces expression should take an argument???? 
+              this.newForfait._id = null; 
               this.newForfait.destination=''; 
-              this.newForfait.depart='';
-              this.newForfait.hotel= {nom:'',adresse:'',starRating:0, nbrChambres:0, photo:'', caracteristiques:[]}; // comment déclarer les objets dans hotel *
+              this.newForfait.villeDepart='';
+              this.newForfait.hotel= {nom:'',coordonnees:'', nombreEtoiles:0, nombreChambres:0, caracteristiques:[]}; 
               this.newForfait.prix= 0;
               this.newForfait.rabais= 0;
               this.newForfait.dateDepart='';
               this.newForfait.dateRetour='';
-              this.newForfait.forfaitVedette= false;
+              this.newForfait.vedette= false;
               this.tableForfait.renderRows()});
       }
     });
-  }*/
+  }
+}

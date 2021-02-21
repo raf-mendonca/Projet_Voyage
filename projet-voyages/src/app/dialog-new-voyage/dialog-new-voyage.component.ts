@@ -1,8 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { Forfait } from '../forfait';
 import { FormControl , Validators} from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MatTable } from '@angular/material/table';
+import { NgForm } from '@angular/forms';
+import { VoyagesService } from '../voyages.service';
+import { FormAjouter } from '../form-ajouter';
 
 @Component({
   selector: 'app-dialog-new-voyage',
@@ -12,31 +15,29 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export class DialogNewVoyageComponent{
 
+  @Input() forfait: Forfait;
+  @Input() formAjouter: FormAjouter;
+  @Output() forfaitFormAjout = new EventEmitter();
+
 constructor(
+    private voyagesService : VoyagesService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<DialogNewVoyageComponent>, 
     @Inject(MAT_DIALOG_DATA) public newForfait: Forfait){
     }    
 
-    // Validations de prix
-    number = new FormControl(null, Validators.required);
-
-    getErrorMessage() {
-      if (this.number.hasError('required')) {
-        return 'Vous devez entrer une valeur';
-      }
-
-      return this.number.hasError('number') ? 'Prix ​​non valide' : '';
-    }
-
-    // Star rating
-    formatValue(value: number) {
-      if (value >0) {
-        return Math.round(value);
-      }
-      return value;
-    }
-
     
+    onAdd(tableauVoyages: MatTable<Forfait>, formAjouter: NgForm): void {
+      if (formAjouter.valid) {
+        this.voyagesService.addForfaits(this.newForfait)
+          .subscribe(forfait  => { 
+            /*this.forfait.push(forfait); */
+            formAjouter.resetForm(); 
+            tableauVoyages.renderRows(); 
+          });
+      }
+    }  
+
+      
     onAnnulerClick(): void {
       this.dialogRef.close();
     }

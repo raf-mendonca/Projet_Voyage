@@ -11,7 +11,7 @@
             <div class="form-group">
                 <label for="depart">Départ</label>
                 <input class="form-control" id="depart" [formControl]="validations" minlength="2" maxlength="160"
-                    required [(ngModel)]="forfait.depart" name="depart" />
+                    required [(ngModel)]="forfait.villeDepart" name="depart" />
             </div>
 
             <div class="form-group">
@@ -23,25 +23,19 @@
             <div class="form-group">
                 <label for="adresse">Adresse de l'hotel</label>
                 <input type="text" class="form-control" id="adresse" [formControl]="validations" minlength="2"
-                    maxlength="200" required [(ngModel)]="forfait.hotel.adresse" name="adresse" />
+                    maxlength="200" required [(ngModel)]="forfait.hotel.coordonnees" name="adresse" />
             </div>
 
             <div class="form-group">
                 <label for="starRating">Étoiles</label>
                 <input type="number" class="form-control" id="starRating" min="1" max="5" required
-                    [(ngModel)]="forfait.hotel.starRating" name="starRating" />
+                    [(ngModel)]="forfait.hotel.nombreEtoiles" name="starRating" />
             </div>
 
             <div class="form-group">
                 <label for="nbrChambres">Nombre de chambres</label>
                 <input type="number" class="form-control" id="nbrChambres" min="0" required
-                    [(ngModel)]="forfait.hotel.nbrChambres" name="nbrChambres" />
-            </div>
-
-            <div class="form-group">
-                <label for="photo">Photo</label>
-                <input type="text" class="form-control" id="photo" required [(ngModel)]="forfait.hotel.photo"
-                    name="photo" />
+                    [(ngModel)]="forfait.hotel.nombreChambres" name="nbrChambres" />
             </div>
 
             <div class="form-group">
@@ -113,7 +107,7 @@
 
             <div class="form-group">
                 <label for="forfaitVedette">Forfait vedette</label>
-                <input class="form-control" id="forfaitVedette" required [(ngModel)]="forfait.forfaitVedette"
+                <input class="form-control" id="forfaitVedette" required [(ngModel)]="forfait.vedette"
                     name="forfaitVedette" />
             </div>
 
