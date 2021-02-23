@@ -1,3 +1,11 @@
+mat-drawer-content {
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .bg {
   background-image: url("../../assets/img/pexelcaraibe.jpg");
 
@@ -5,15 +13,8 @@
   width: auto;
 
   /* Create the parallax scrolling effect */
-  background-attachment: fixed;
+  background-attachment: fixed !important;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.container {
-  display: flex;
-  /*flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-around;*/
+  background-size: cover !important;
 }

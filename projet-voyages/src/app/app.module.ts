@@ -44,6 +44,7 @@ import { ForfaitYComponent } from './forfait-y/forfait-y.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AjouterComponent } from './ajouter/ajouter.component';
 import { AproposComponent } from './apropos/apropos.component';
+import { DialogNewVoyageForfaitComponent } from './dialog-new-voyage-forfait/dialog-new-voyage-forfait.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { AproposComponent } from './apropos/apropos.component';
     EnteteComponent,
     ForfaitYComponent,
     AjouterComponent,
-    AproposComponent
+    AproposComponent,
+    DialogNewVoyageForfaitComponent
   ],
   imports: [
     BrowserModule,

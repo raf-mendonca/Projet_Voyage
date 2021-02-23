@@ -22,6 +22,10 @@ export class VoyagesService {
     return this.http.get<Forfait[]>(this.forfaitsUrl+'da/1996489');  
   }
 
+  getAllForfaits(): Observable<Forfait[]> {
+    return this.http.get<Forfait[]>(this.forfaitsUrl);  
+  }
+
   addForfaits(forfait: Forfait): Observable<Forfait> {
     return this.http.post<Forfait>(this.forfaitsUrl, forfait, httpOptions);  
   }

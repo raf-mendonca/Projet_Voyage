@@ -5,8 +5,11 @@ import { VoyagesService } from '../voyages.service';
 import { MatTable } from '@angular/material/table';  // Permet de mettre à jour les données du tableau 
 import { NgForm } from '@angular/forms';  // Permet de vérifier si le formulaire est valide
 import { MatDialog } from '@angular/material/dialog';
-import { DialogNewVoyageComponent } from '../dialog-new-voyage/dialog-new-voyage.component';
+import { DialogNewVoyageForfaitComponent } from '../dialog-new-voyage-forfait/dialog-new-voyage-forfait.component';
 import { AjouterComponent } from '../ajouter/ajouter.component';
+import { FormsModule }   from '@angular/forms';
+import { BrowserModule } from "@angular/platform-browser";
+import { from } from 'rxjs';
 
 
 @Component({
@@ -16,7 +19,7 @@ import { AjouterComponent } from '../ajouter/ajouter.component';
 })
 export class AdministrationComponent implements OnInit { 
   @ViewChild(MatTable) tableForfait: MatTable<any>;
-
+  forfaits: Forfait[];
   tableauVoyages: Forfait[]; 
   columnsToDisplay = ['destination', 'villeDepart', 'hotel.nom',  'prix', 'rabais', 'dateDepart', 'dateRetour','actions']; 
   
@@ -113,7 +116,7 @@ export class AdministrationComponent implements OnInit {
     if (formAjouter.valid) {
       this.voyagesService.addForfaits(this.newForfait)
         .subscribe(forfait  => { 
-          /*forfait.push(forfait);*/ 
+          this.forfaits.push(forfait); 
           formAjouter.resetForm(); 
           tableauVoyages.renderRows(); });
     }
@@ -122,8 +125,8 @@ export class AdministrationComponent implements OnInit {
   /* Exemple avec open dialog */
   
   openDialogNewVoyage(): void {
-    const dialogRef = this.dialog.open(DialogNewVoyageComponent, {
-      width: '100%',
+    const dialogRef = this.dialog.open(DialogNewVoyageForfaitComponent, {
+      width: '80%',
       data: this.newForfait
     });
 
@@ -134,8 +137,7 @@ export class AdministrationComponent implements OnInit {
         console.log(this.newForfait);
         this.voyagesService.addForfaits(this.newForfait)
             .subscribe(forfait  => { 
-
-              this.tableauVoyages.push(forfait); //erreur dans forfait => element acces expression should take an argument???? 
+              this.tableauVoyages.push(forfait); 
               this.newForfait._id = null; 
               this.newForfait.destination=''; 
               this.newForfait.villeDepart='';

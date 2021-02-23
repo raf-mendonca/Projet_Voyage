@@ -1,3 +1,8 @@
-<div class="bg">
-    <p>forfait-y works!</p>
-</div>
+<mat-drawer-container class="bg">
+    <h1>forfait y Jamaique</h1>
+    <div *ngFor="let item of tableauVoyages">
+        <ng-template [ngIf]="item.destination.includes('Jamaïque')||item.destination.includes('Jamaïque')">
+            <app-maxicomp [forfait]="item"></app-maxicomp>
+        </ng-template>
+    </div>
+</mat-drawer-container>
