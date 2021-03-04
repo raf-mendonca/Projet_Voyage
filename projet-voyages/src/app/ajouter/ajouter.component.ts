@@ -175,23 +175,7 @@ export class AjouterComponent implements OnInit {
   }
 
   ajouterForfait(): void { //createProduct tableForfaits: MatTable<any>, forfaitFormAjout: NgForm
-    // const data:  = {
-    //   destination: this.forfait.destination, 
-    //   villeDepart: this.forfait.villeDepart, 
-    //   hotel: this.forfait.hotel, 
-    //     nom: this.forfait.hotel.nom, 
-    //     coordonnees: this.forfait.hotel.coordonnees, 
-    //     nombreEtoiles: this.forfait.hotel.nombreEtoiles, 
-    //     nombreChambres: this.forfait.hotel.nombreChambres, 
-    //     caracteristiques: this.forfait.hotel.caracteristiques,     
-    //   prix: this.forfait.prix, 
-    //   rabais: this.forfait.rabais, 
-    //   dateDepart: this.forfait.dateDepart, 
-    //   dateRetour: this.forfait.dateRetour, 
-    //   vedette: this.forfait.vedette
-    // };
-
-    this.voyageService.addForfaits(this.forfait)
+       this.voyageService.addForfaits(this.forfait)
       .subscribe(
         response => {
           console.log(response);     //console.log(response.push(response));    
@@ -226,6 +210,8 @@ export class AjouterComponent implements OnInit {
       duree: '',
       da: '1996489',
     };
+
+    
   }//Fin ajouter
 
 }//Fin class
