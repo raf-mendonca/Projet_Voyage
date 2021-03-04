@@ -24,8 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
-
-
+import {CdkTableModule} from '@angular/cdk/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +44,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AjouterComponent } from './ajouter/ajouter.component';
 import { AproposComponent } from './apropos/apropos.component';
 import { DialogNewVoyageForfaitComponent } from './dialog-new-voyage-forfait/dialog-new-voyage-forfait.component';
+import { ChartsModule } from 'ng2-charts';
+import { GraphiqueComponent } from './graphique/graphique.component';
+import { GraphRevervationComponent } from './graph-revervation/graph-revervation.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { DialogNewVoyageForfaitComponent } from './dialog-new-voyage-forfait/dia
     ForfaitYComponent,
     AjouterComponent,
     AproposComponent,
-    DialogNewVoyageForfaitComponent
+    DialogNewVoyageForfaitComponent,
+    GraphiqueComponent,
+    GraphRevervationComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,9 @@ import { DialogNewVoyageForfaitComponent } from './dialog-new-voyage-forfait/dia
     NgbModule,
     MatTabsModule,
     MatDialogModule,
-    MatRadioModule
+    MatRadioModule,
+    CdkTableModule,
+    ChartsModule
     
   ],
   providers: [VoyagesService],

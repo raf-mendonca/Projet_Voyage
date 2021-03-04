@@ -2,80 +2,15 @@ table {
   width: 100%;
 }
 
-#tableLayout {
-  padding-right: 32px;
-  padding-left: 32px;
-}
-
-.input-full-width {
-  width: 100%;
-}
-
-.mat-column-nom {
-  width: 100%;
-}
-.mat-column-actions {
-  min-width: 90px !important;
-}
-
-.boutonsAction {
-  padding: 0;
-}
-.boutonsAction form {
-  display: inline-block;
-}
-
-mat-tab-group {
-  text-align: center;
-}
-
-table {
-  width: 100%;
-}
-
-.formLayout {
-  min-width: 150px;
-  max-width: 100%;
-  width: 100%;
-
-  padding: 20ppx;
-  margin: 20px;
-  border: 1px solid black;
-  font-size: 16px;
-}
-
-.inputLayout {
-  padding: 20px;
-  margin: 20px;
-  border: 1px solid black;
-}
-.example-full-width {
-  width: 100%;
-}
-
-mat-label {
-  color: black !important;
-}
-mat-form-field {
-  color: black !important;
-}
-
-.example-section {
-  margin: 12px;
+.bntp {
+  margin: 2em;
   display: flex;
-  flex-wrap: wrap;
-  align-content: center;
+  flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
-mat-checkbox {
-  margin: 5px;
-}
-
-.titreLayout {
-  margin: 12px;
-  align-content: center;
-  align-items: center;
-  justify-content: flex-start;
+#forfaitFormEdition {
+  max-height: 250px;
+  overflow-y: scroll;
 }

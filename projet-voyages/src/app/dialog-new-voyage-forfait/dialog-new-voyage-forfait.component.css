@@ -1,46 +1,46 @@
 .formLayout {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 
-    padding: 20ppx;
-    margin: 20px;
-    border: 1px solid black;
-    font-size: 16px;
+  padding: 20ppx;
+  margin: 20px;
+  border: 1px solid black;
+  font-size: 16px;
 }
 
 .inputLayout {
-    padding: 20px;
-    margin: 20px;
-    border: 1px solid black;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid black;
 }
 .example-full-width {
-    width: 100%;
+  width: 100%;
 }
 
 mat-label {
-    color: black !important;
+  color: black !important;
 }
-mat-form-field {
-    color: black !important;
+mat-dialog-container {
+  width: 700px !important;
 }
 
 .example-section {
-    margin: 12px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: center;
-    justify-content: flex-start;
+  margin: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 mat-checkbox {
-    margin: 5px;
+  margin: 5px;
 }
 
 .titreLayout {
-    margin: 12px;
-    align-content: center;
-    align-items: center;
-    justify-content: flex-start;
+  margin: 12px;
+  align-content: center;
+  align-items: center;
+  justify-content: flex-start;
 }

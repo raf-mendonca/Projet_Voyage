@@ -1,11 +1,11 @@
-import {Component, Inject, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Inject, OnInit, Output, Input, EventEmitter} from '@angular/core';
 import {VoyagesService} from "../voyages.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Forfait} from "../forfait";
 import {MatTable} from "@angular/material/table";
 import {NgForm} from "@angular/forms";
 import { FormsModule }   from '@angular/forms';
-import {BrowserModule} from "@angular/platform-browser";
+import { BrowserModule } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-dialog-new-voyage-forfait',
@@ -15,7 +15,8 @@ import {BrowserModule} from "@angular/platform-browser";
 
 export class DialogNewVoyageForfaitComponent implements OnInit {
   number: string;
-  forfaits: Forfait[];
+  @Input() forfaits: Forfait[];
+  tableauVoyages: Forfait[];
   @Output() forfaitFormAjout = new EventEmitter();
 
   constructor(
@@ -29,12 +30,12 @@ export class DialogNewVoyageForfaitComponent implements OnInit {
 
   }
 
-  onAdd(tableauVoyages: MatTable<Forfait>, formAjouter: NgForm): void {
-    if (formAjouter.valid) {
+  onAdd(tableauVoyages: MatTable<Forfait>, forfaitFormAjout: NgForm): void {
+    if (forfaitFormAjout.valid) {
         this.voyagesService.addForfaits(this.newForfait)
           .subscribe(forfait  => {
-            this.forfaits.push(forfait);
-            formAjouter.resetForm();
+            this.tableauVoyages.push(forfait);
+            forfaitFormAjout.resetForm();
             tableauVoyages.renderRows();
           });
       }
@@ -45,7 +46,7 @@ export class DialogNewVoyageForfaitComponent implements OnInit {
   }
 
   onCloseDialog(): void {
-    this.dialogRef.close(this.forfaits)
+    this.dialogRef.close(this.tableauVoyages)
   }
 
   getErrorMessage() {

@@ -19,18 +19,19 @@ import { from } from 'rxjs';
 })
 export class AdministrationComponent implements OnInit { 
   @ViewChild(MatTable) tableForfait: MatTable<any>;
-  forfaits: Forfait[];
+  //forfaits: Forfait[];
   tableauVoyages: Forfait[]; 
   columnsToDisplay = ['destination', 'villeDepart', 'hotel.nom',  'prix', 'rabais', 'dateDepart', 'dateRetour','actions']; 
-  
-  /* ANTIGO
-  columnsToDisplay = ['destination', 'villeDepart', 'hotel.nom', 'hotel.coordonnees', 'hotel.nombreEtoiles', 'hotel.nombreChammbres', 'hotel.caracteristiques', 'prix', 'rabais', 'dateDepart', 'dateRetour', 'vedette' ,'actions']; */
-
-  @Input() forfait: Forfait;
-  @Input() formAjouter: AjouterComponent;
-  @Output() forfaitFormAjout = new EventEmitter();
   newForfait : Forfait;
   selectedForfait: Forfait;
+
+  /* ANTIGO
+  columnsToDisplay = ['destination', 'villeDepart', 'hotel.nom', 'hotel.coordonnees', 'hotel.nombreEtoiles', 'hotel.nombreChammbres', 'hotel.caracteristiques', 'prix', 'rabais', 'dateDepart', 'dateRetour', 'vedette' ,'actions']; 
+  @Input() forfait: Forfait;
+  @Input() formAjouter: AjouterComponent;
+  @Output() forfaitFormAjout = new EventEmitter();*/
+
+  
 
   //Validations
   // Validations texte
@@ -67,6 +68,7 @@ export class AdministrationComponent implements OnInit {
   constructor(private voyagesService: VoyagesService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    //Pour initialiser l'objet newForfait
     this.newForfait = {
       _id: null, 
       destination:'', 
@@ -86,17 +88,25 @@ export class AdministrationComponent implements OnInit {
       duree: '',
       da: '1996489',
     };
-    this.getForfaits();
+    this.getAllForfaits();
   }
+/*
+  getForfaits(): void {
+    this.voyagesService.getForfaits()
+        .subscribe(resultat => this.forfaits = resultat);
+  } */
+
+  
+  getAllForfaits(): void {
+    this.voyagesService.getAllForfaits()
+        .subscribe(resultat => this.tableauVoyages = resultat);
+  }
+  
+  
 
   onSelect(forfait: Forfait): void {
     this.selectedForfait = forfait;
-  }
-
-  getForfaits(): void {
-    this.voyagesService.getForfaits()
-        .subscribe(resultat => this.tableauVoyages = resultat);
-  }
+  } 
   
   
   onEdit(forfaitFormEdition: NgForm): void {
@@ -116,7 +126,7 @@ export class AdministrationComponent implements OnInit {
     if (formAjouter.valid) {
       this.voyagesService.addForfaits(this.newForfait)
         .subscribe(forfait  => { 
-          this.forfaits.push(forfait); 
+          this.tableauVoyages.push(forfait); 
           formAjouter.resetForm(); 
           tableauVoyages.renderRows(); });
     }
@@ -134,7 +144,6 @@ export class AdministrationComponent implements OnInit {
       console.log('The dialog was closed');
       if(result) {
         this.newForfait = result;
-        console.log(this.newForfait);
         this.voyagesService.addForfaits(this.newForfait)
             .subscribe(forfait  => { 
               this.tableauVoyages.push(forfait); 
